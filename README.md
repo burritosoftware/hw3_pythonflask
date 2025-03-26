@@ -23,7 +23,7 @@ source venv/bin/activate
 ```bash
 pip3 install -r requirements.txt
 ```
-5. If you would like to not use the starter database, which has example recipes and an example account, delete it.
+5. If you would like to not use the starter database, which has example recipes and example accounts, delete it.
 ```bash
 rm app/app.db
 ```
@@ -43,7 +43,7 @@ python3 run.py
 You can sign up for an account or log in to an existing account. Logged in users can create new recipes and delete any recipe. Logged out users can only see the recipe list.
 
 An example account and example recipes are included in the starter database `app.db`.  
-Login using username `testuser` and password `usertest`.
+Log in using username `testuser` and password `usertest`, or `tacobell` and `belltaco`. You can also sign up for a new account.
 
 # Disclaimer
 Unlike my other projects, this one is an implementation for a college assignment and is source-available so I can submit it, but is **NOT** freely licensed. This means that if you're a student and you want to plagarize this, please don't! It's not legally allowed, sorry :(

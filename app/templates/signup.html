@@ -12,14 +12,25 @@
     <h2>Sign up to view or create recipes.</h2>
     <form action="" method="POST" novalidate>
         {{form.hidden_tag()}}
-        <p> {{form.username.label}}</br>
-        {{form.username()}}</p>
 
-        <p>{{form.password.label}}</br>
-        <p>{{form.password()}}</p>
+        <p>
+          {{form.email.label}}
+          <br>
+          {{form.email()}}
+        </p>
 
-        <p>Remember Me</p>
-        <p>{{form.remember_me()}}</p>
+        <p>
+          {{form.username.label}}
+          <br>
+          {{form.username()}}
+        </p>
+
+        <p>
+          {{form.password.label}}
+          </br>
+          {{form.password()}}
+        </p>
+
         <p>{{form.submit()}}</p>
     </form>
 </body>

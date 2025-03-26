@@ -12,11 +12,17 @@
     <h2>You must log in to view or create recipes.</h2>
     <form action="" method="POST" novalidate>
         {{form.hidden_tag()}}
-        <p> {{form.username.label}}</br>
-        {{form.username()}}</p>
+        <p>
+            {{form.username.label}}
+            <br>
+            {{form.username()}}
+        </p>
 
-        <p>{{form.password.label}}</br>
-        <p>{{form.password()}}</p>
+        <p>
+            {{form.password.label}}
+            <br>
+            {{form.password()}}
+        </p>
 
         <p>Remember Me {{form.remember_me()}}</p>
         <p>{{form.submit()}}</p>

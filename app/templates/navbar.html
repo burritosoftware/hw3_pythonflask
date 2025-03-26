@@ -1,0 +1,8 @@
+<a href="/">Home</a>
+<br>
+<br>
+{% if current_user.is_authenticated %}
+  <a href="/logout">Log Out</a> | <a href="/recipe/new">Create Recipe</a>
+{% else %}
+  <a href="/login">Log In</a> | <a href="/signup">Sign Up</a>
+{% endif %}

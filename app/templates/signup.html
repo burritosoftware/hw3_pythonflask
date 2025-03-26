@@ -1,15 +1,15 @@
 <html>
 <head>
     {% include 'water.html' %}
-    <title>Recipe App - Login</title>
+    <title>Recipe App - Sign Up</title>
 </head>
 <body>
     <a href="/">Home</a>
     <br>
     <br>
-    <a href="/signup">Sign Up</a>
-    <h1>Log In</h1>
-    <h2>You must log in to view or create recipes.</h2>
+    <a href="/login">Log In</a>
+    <h1>Sign Up</h1>
+    <h2>Sign up to view or create recipes.</h2>
     <form action="" method="POST" novalidate>
         {{form.hidden_tag()}}
         <p> {{form.username.label}}</br>
@@ -18,7 +18,8 @@
         <p>{{form.password.label}}</br>
         <p>{{form.password()}}</p>
 
-        <p>Remember Me {{form.remember_me()}}</p>
+        <p>Remember Me</p>
+        <p>{{form.remember_me()}}</p>
         <p>{{form.submit()}}</p>
     </form>
 </body>

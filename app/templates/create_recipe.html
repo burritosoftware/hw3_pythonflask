@@ -1,0 +1,26 @@
+<html>
+<head>
+  {% include 'water.html' %}
+  <title>Recipe App - Create Recipe</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <h1>Create Recipe</h1>
+    <form action="" method="POST" novalidate>
+        {{form.hidden_tag()}}
+        <p> {{form.title.label}}</br>
+        {{form.title()}}</p>
+
+        <p>{{form.description.label}}</br>
+        <p>{{form.description()}}</p>
+        
+        <p>{{form.ingredients.label}}</br>
+        <p>{{form.ingredients()}}</p>
+
+        <p>{{form.instructions.label}}</br>
+        <p>{{form.instructions()}}</p>
+
+        <p>{{form.submit()}}</p>
+    </form>
+</body>
+</html>

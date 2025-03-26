@@ -1,0 +1,15 @@
+<html>
+<head>
+    {% include 'water.html' %}
+    <title>Recipe App - All Recipes</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <h1>Home - All Recipes</h1>
+    <ul>
+        {% for recipe_name, recipe_author, recipe_id in recipes %}
+        <li><a href="/recipe/{{recipe_id}}">{{recipe_name}} ({{recipe_author}})</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

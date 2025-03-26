@@ -1,6 +1,6 @@
 from app import myapp_obj
 from flask import render_template, flash, redirect, url_for, request
-from app.forms import LoginForm, RecipeForm
+from app.forms import LoginForm, SignupForm, RecipeForm
 from app.models import User, Recipe
 from app import db
 from flask_login import login_required, login_user, logout_user, current_user
@@ -33,16 +33,42 @@ def login():
                 # Login the user, and remember the session if the box is checked
                 login_user(user, remember=form.remember_me.data)
 
-                flash('Logged in successfully.')
-
                 next = request.args.get('next')
 
                 return redirect(next or url_for('view_all_recipes'))
         
+        # If the details were wrong, display an error and refresh to try again
         flash('Login details were incorrect.')
         return redirect(url_for('login'))
+    
+    # Display login form
     return render_template('login.html', form=form)
 
+@myapp_obj.route("/signup", methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        # Check if this email or user exists already
+        user1 = User.query.filter(User.username == form.username.data)
+        user2 = User.query.filter(User.email == form.email.data)
+        if user1 or user2:
+            # If the user exists already, prevent signup.
+            flash("This user already exists.")
+            redirect(url_for('signup'))
+        
+        # Create the new user, add them to the db, log them in
+        new_user = User(email=form.email.data, username=form.username.data, password=form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+
+        # Redirect to homepage
+        return redirect(url_for('view_all_recipes'))
+    
+    # Display signup form
+    return render_template('signup.html', form=form)
+
+### AUTHENTICATED ROUTES ###
 @myapp_obj.route("/logout")
 @login_required
 def logout():
@@ -50,12 +76,12 @@ def logout():
     logout_user()
     return redirect(url_for('view_all_recipes'))
 
-### AUTHENTICATED ROUTES ###
 @myapp_obj.route("/recipe/new", methods=['GET', 'POST'])
 @login_required
 def new_recipe():
     form = RecipeForm()
     if form.validate_on_submit():
+        # Create a new recipe
         r = Recipe(title=form.title.data,
                    description=form.description.data,
                    ingredients=form.ingredients.data,
@@ -67,19 +93,30 @@ def new_recipe():
         db.session.commit()
         # Redirect to the recipe's details
         return redirect(f"/recipe/{r.id}")
+    
+    # Return recipe form page
     return render_template('create_recipe.html', form=form)
 
 @myapp_obj.route("/recipe/<integer>")
 @login_required
 def view_single_recipe(integer):
+    # Get the recipe ID from the route
     recipe = Recipe.query.get(integer)
+    # Get the author from the recipe (used for showing author name)
     user = User.query.get(recipe.author)
+
+    # Return recipe details page
     return render_template('view_recipe.html', recipe=recipe, user=user)
 
 @myapp_obj.route("/recipe/<integer>/delete")
 @login_required
 def delete_recipe(integer):
+    # Get the recipe ID from the route
     recipe = Recipe.query.get(integer)
+
+    # Delete the recipe
     db.session.delete(recipe)
     db.session.commit()
+
+    # Redirect back to homepage
     return redirect(url_for('view_all_recipes'))

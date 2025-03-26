@@ -10,6 +10,9 @@
     <a href="/signup">Sign Up</a>
     <h1>Log In</h1>
     <h2>You must log in to view or create recipes.</h2>
+    {% for message in get_flashed_messages() %}
+    <h3>{{message}}</h3>
+    {% endfor %}
     <form action="" method="POST" novalidate>
         {{form.hidden_tag()}}
         <p>

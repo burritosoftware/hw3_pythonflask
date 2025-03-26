@@ -49,12 +49,12 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         # Check if this email or user exists already
-        user1 = User.query.filter(User.username == form.username.data)
-        user2 = User.query.filter(User.email == form.email.data)
+        user1 = User.query.filter(User.username == form.username.data).first()
+        user2 = User.query.filter(User.email == form.email.data).first()
         if user1 or user2:
             # If the user exists already, prevent signup.
             flash("This user already exists.")
-            redirect(url_for('signup'))
+            return redirect(url_for('signup'))
         
         # Create the new user, add them to the db, log them in
         new_user = User(email=form.email.data, username=form.username.data, password=form.password.data)

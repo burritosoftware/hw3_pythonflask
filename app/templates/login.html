@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Home Page - my blog</title>
+</head>
+<body>
+    <h1>Sign In</h1>
+    <form action="" method="POST" novalidate>
+        {{form.hidden_tag()}}
+        <p> {{form.username.label}}</br>
+        {{form.username()}}</p>
+
+        <p>{{form.password.label}}</br>
+        <p>{{form.password()}}</p>
+
+        <p>{{form.submit()}}</p>
+        <p>{{form.remember_me()}}</p>
+    </form>
+</body>
+</html>

@@ -6,12 +6,13 @@
 <body>
     {% include 'navbar.html' %}
     <h1>View Recipe</h1>
+    <h2>Recipe: {{recipe.title}}</h2>
+    <h3>Author: {{user.username}}</h3>
     <ul>
-        <li>Title: {{recipe.title}}</li>
-        <li>Author: {{user.username}}</li>
-        <li>Description: {{recipe.description}}</li>
-        <li>Ingredients: {{recipe.ingredients}}</li>
-        <li>Instructions: {{recipe.instructions}}</li>
+        <li>Created: {{recipe.created}}</li>
+        <li>Description: <p>{{recipe.description}}</p></li>
+        <li>Ingredients: <p>{{recipe.ingredients}}</p></li>
+        <li>Instructions: <p>{{recipe.instructions}}</p></li>
     </ul>
     <br>
     <a href="{{recipe.id}}/delete">Delete Recipe</a>

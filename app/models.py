@@ -5,9 +5,9 @@ from flask_login import UserMixin
 # The class inherits from UserMixin to implement critical flask-login functions automatically.
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(32))
     username = db.Column(db.String(32))
     password = db.Column(db.String(32))
-    email = db.Column(db.String(32))
     recipes = db.relationship("Recipe")
 
 # Recipe class that links back to the author (user).
